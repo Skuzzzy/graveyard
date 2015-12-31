@@ -9,3 +9,5 @@ print reduce(operator.mul,\
                             [q-5 for q in xrange(50) if q % 2 == 0])])]]\
           if rr[0] != 0],\
         1)
+
+print ", ".join(["(" + str(a[0]) + "F is " + str(a[1]) + "C)" for a in map(lambda x: (x, (x-32)*(5.0/9)), [120, 50])])
