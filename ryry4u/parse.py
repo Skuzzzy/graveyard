@@ -18,17 +18,19 @@ def construct_binary_ast_node(op_token, expr1, expr2):
     return (op_token, expr1, expr2)
 
 def construct_const_ast_node(const_token):
-    return (const_token)
+    return (const_token,)
 
+def get_token_type(token):
+    return token[1]
+
+def get_token_value(token):
+    return token[0]
 
 def construct_ast(labeled_arr):
     param_stack = []
-    get_tok_type = lambda token: token[1]
-    get_tok_value = lambda token: token[0]
     for labeled in labeled_arr:
-        print param_stack
-        token_type = get_tok_type(labeled)
-        token_value = get_tok_value(labeled)
+        token_type = get_token_type(labeled)
+        token_value = get_token_value(labeled)
 
         if token_type == 'UNKNOWN':
             raise Exception('Unknown Token Type')
@@ -45,7 +47,7 @@ def construct_ast(labeled_arr):
     if len(param_stack) != 1:
         raise Exception('Param stack at unexpected size')
 
-    return param_stack
+    return param_stack.pop()
 
 def numerical(string):
     try:
@@ -65,7 +67,13 @@ def label(token):
 
     return (token, 'UNKNOWN')
 
+def construct_expr_ast(token_list):
+    return construct_ast(label_tokens(token_list))
+
+
 # test = ['2', 'x', '2', '^', '*']
+# test = ['x', '2', '*']
+# test = ['2']
 # labeled = label_tokens(test)
 # print labeled
 # ast = construct_ast(labeled)
