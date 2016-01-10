@@ -45,6 +45,7 @@ def construct_ast(labeled_arr):
             param_stack.append(construct_const_ast_node(labeled))
 
     if len(param_stack) != 1:
+        print "\n".join([str(x) for x in param_stack])
         raise Exception('Param stack at unexpected size')
 
     return param_stack.pop()
@@ -53,7 +54,7 @@ def numerical(string):
     try:
         float(string)
         return True
-    except ValueError:
+    except (TypeError, ValueError):
         return False
 
 def label(token):
@@ -62,7 +63,7 @@ def label(token):
         return (token, 'OPERATOR')
     if numerical(token):
         return (token, 'CONSTANT')
-    if re.match(r'^[A-z]+$', token):
+    if re.match(r'^[a-zA-Z]+$', token):
         return (token, 'IDENTIFIER')
 
     return (token, 'UNKNOWN')
