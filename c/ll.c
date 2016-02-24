@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 struct linked_list
 {
@@ -88,6 +89,23 @@ void free_linked_list(struct linked_list * list)
     }
 }
 
+int get_element_from_linked_list(struct linked_list * list, int index)
+{
+    if(!(index < list->size) || (index < 0))
+    {
+	return INT_MIN; // Out of bounds
+    }
+    else
+    {
+	struct node * current = list->head;
+	for(int inx=0; inx < index; inx++)
+	{
+	    current = current->next;
+	}
+	return current->data;
+    }
+
+}
 
 int main()
 {
@@ -95,14 +113,15 @@ int main()
     head->data = 5;
     head = new_node_specified(10, head);
     printf("%d\n", head->data);
-    printf("%d", head->next->data);
+    printf("%d\n", head->next->data);
 
     struct linked_list * list = new_linked_list();
     append_linked_list_value(list, 5);
     append_linked_list_value(list, 10);
     append_linked_list_value(list, 20);
     print_linked_list(list);
-    printf("%d %d", list->head->data, list->tail->data);
+    printf("%d %d\n", list->head->data, list->tail->data);
+    printf("%d", get_element_from_linked_list(list, 5));
     free_linked_list(list);
 
     return 0;
