@@ -1,5 +1,5 @@
 
-from parse import get_token_type, get_token_value, construct_binary_ast_node, label
+from parse import get_token_type, get_token_value, label
 from aux_derive import derive_mult, derive_div, derive_add, derive_sub, derive_pow
 
 bin_operators_impl = {
