@@ -17,7 +17,7 @@ struct node
 
 struct node * new_node_noinit()
 {
-    struct node * inst = calloc(1, sizeof(struct node));
+    struct node * inst = (struct node*)calloc(1, sizeof(struct node));
     inst->data = 0;
     inst->next = NULL;
     return inst;
@@ -25,7 +25,7 @@ struct node * new_node_noinit()
 
 struct node * new_node_specified(int data, struct node * next)
 {
-    struct node * inst = calloc(1, sizeof(struct node));
+    struct node * inst = (struct node*)calloc(1, sizeof(struct node));
     inst->data = data;
     inst->next = next;
     return inst;
@@ -33,7 +33,7 @@ struct node * new_node_specified(int data, struct node * next)
 
 struct linked_list * new_linked_list()
 {
-    struct linked_list * inst = calloc(1, sizeof(struct node));
+    struct linked_list * inst = (struct linked_list*) calloc(1, sizeof(struct node));
     inst->size = 0;
     inst->head = NULL;
     inst->tail = NULL;
@@ -58,8 +58,8 @@ void append_linked_list(struct linked_list * list, struct node * tail)
 
 void append_linked_list_value(struct linked_list * list, int value)
 {
-    struct node * new = new_node_specified(value, NULL);
-    append_linked_list(list, new);
+    struct node * inst = new_node_specified(value, NULL);
+    append_linked_list(list, inst);
 }
 
 void print_linked_list(struct linked_list * list)
